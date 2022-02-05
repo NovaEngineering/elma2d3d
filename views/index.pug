@@ -1,5 +1,18 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Document
+    // Подгружаем библиотеки
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+    script(src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js")
+    //Подгружаем скрипты со своего сервера
+    script
+      include jq.js 
+    // Подгружаем CSS от Forge Autodesk
+    link(rel="stylesheet", href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css")
+  body 
+  h1 Это просмотрщик
+  #list
