@@ -33,6 +33,10 @@ app.get('/publictoken', async (req, res, next) => {
        tokenExternal = await getClient(scopesExternal).authenticate();
        res.send(tokenExternal)
     } catch (err) {next(err)}}); 
+// Пробуем GET buckets/:bucketKey/details API
+/*app.get('/bucket_details', async (req, res, next) {
+
+})*/
 //Шаблонизация
 app.set('views', path.join(__dirname,'./views') );
 app.set('view engine', 'pug')
