@@ -15,11 +15,11 @@ function getClient(scopes) { return new ForgeSDK.AuthClientTwoLegged(client_id, 
 /*
 * Маршрутизация
 */
-//Главная страница ++++++++++
+//Главная страница ++++++++++...Это роутинг
 app.get('/', function(req, res) {
         res.render('index')
 });
-// URL для перечня бакетов
+// URL для перечня бакетов...Это роутинг
 app.get('/buckets', async (req, res, next) => {
     try {
        tokenInternal = await getClient(scopesInternal).authenticate();
@@ -27,20 +27,28 @@ app.get('/buckets', async (req, res, next) => {
        let buckets = await BucketsApi.getBuckets({}, getClient(scopesInternal), tokenInternal)
      res.send(buckets)
     } catch (err) {next(err)}});
-// Генерируем URL для публичного токена
+// Генерируем URL для публичного токена...Это роутинг
 app.get('/publictoken', async (req, res, next) => {
     try {
        tokenExternal = await getClient(scopesExternal).authenticate();
        res.send(tokenExternal)
     } catch (err) {next(err)}}); 
 // Пробуем GET buckets/:bucketKey/details API
-/*app.get('/bucket_details', async (req, res, next) {
-
-})*/
-//Шаблонизация
-app.set('views', path.join(__dirname,'./views') );
+app.get('/bucket_details', async (req, res, next) => {
+    try{
+    tokenInternal = await getClient(scopesInternal).authenticate();
+    let BucketsApi = new ForgeSDK.BucketsApi();
+    let bucketDetails = await BucketsApi.getBucketDetails("warestore2", getClient(scopesInternal), tokenInternal);
+    res.send(bucketDetails);
+    console.log(bucketDetails);
+}catch (err) {next(err)}
+    //"warestore2"
+    //getBucketDetails(bucketKey, oauth2client, credentials)
+})
+//Шаблонизация ...Это middleware
+app.set('views', path.join(__dirname,'./views') ); 
 app.set('view engine', 'pug')
-//Слушаем порт.
+//Слушаем порт.... Это middleware
 app.listen(port, console.log(`Приложение ${appName}" работает на порту "${port}"`));
 
 

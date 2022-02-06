@@ -2,10 +2,7 @@
   "name": "elma2d3d",
   "version": "0.0.0",
   "private": false,
-  "scripts": {
-    
-
-  },
+  "scripts": {},
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
