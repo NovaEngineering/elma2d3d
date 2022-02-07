@@ -2,7 +2,7 @@
 *Это приложени просматривает 2d и 3d  контент проекта и файлов из data storage Forge Autodesk 
 */
 
-///Используй Linters!!!
+///Используй Linters!!! Task runners gulp and grunt
 // Используемые модули
 require('dotenv').config();
 const express = require('express');
