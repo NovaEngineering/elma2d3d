@@ -1,2 +1,0 @@
-var viewer;
-var options = {};
