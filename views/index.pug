@@ -5,7 +5,7 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Viewer
-    linc(rel="stylesheet", href="https://vanillacss.com/vanilla.css")
+    
     // Подгружаем библиотеки
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
     script(src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js")
@@ -13,13 +13,19 @@ html(lang="en")
     //Подгружаем скрипты со своего сервера
     script
       include jq.js
+      include tree.js
     script 
       include viewer.js 
     
     // Подгружаем CSS от Forge Autodesk
     link(rel="stylesheet", href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css")
+    // JStree
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js")
+    link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css")
   body 
   h1 Это просмотрщик
   #quantity
   #list
+  #formats Форматы:
+  #tree Дерево пока не загружено!
   #forgeViewer

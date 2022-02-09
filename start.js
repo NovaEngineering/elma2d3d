@@ -1,7 +1,4 @@
-/* 
-*Это приложени просматривает 2d и 3d  контент проекта и файлов из data storage Forge Autodesk 
-*/
-
+//Это приложени просматривает 2d и 3d  контент проекта и файлов из data storage Forge Autodesk 
 ///Используй Linters!!! Task runners gulp and grunt
 // Используемые модули
 require('dotenv').config();
@@ -11,17 +8,23 @@ const pug = require('pug')
 const path = require('path');
 //Переменные
 let app = express();
+//Импорт переменных
 var {appName, port, client_id, client_secret, autoRefresh, scopesExternal, scopesInternal} = require('./server/config');
 //Функции
 function getClient(scopes) { return new ForgeSDK.AuthClientTwoLegged(client_id, client_secret, scopes, autoRefresh);}
-/*
-* Маршрутизация
-*/
-
 //Главная страница ++++++++++...Это роутинг
 app.get('/', function(req, res) {
         res.render('index')
 });
+//Данные проекта
+app.get('/project_data', function (req, res) { 
+    // Данные проекта
+    let projectData = {
+        name: "Проектирование склада Элма",
+        stage: "стадия П (проектная документация)"
+    };
+    res.json(projectData);
+})
 // URL для перечня бакетов...Это роутинг
 app.get('/buckets', async (req, res, next) => {
     try {
@@ -29,8 +32,7 @@ app.get('/buckets', async (req, res, next) => {
        let BucketsApi = new ForgeSDK.BucketsApi();
        let buckets = await BucketsApi.getBuckets({}, getClient(scopesInternal), tokenInternal)
      res.send(buckets)
-     console.log(req.hostname, req.method )
-    } catch (err) {next(err)}});
+         } catch (err) {next(err)}});
 // Генерируем URL для публичного токена...Это роутинг
 app.get('/publictoken', async (req, res, next) => {
     try {
@@ -45,13 +47,12 @@ app.get('/bucket_details', async (req, res, next) => {
 
     let bucketDetails = await BucketsApi.getBucketDetails("warestore2", getClient(scopesInternal), tokenInternal);
     res.send(bucketDetails);
-    console.log(bucketDetails);
-}catch (err) {next(err)}
+   }catch (err) {next(err)}
 })
 //Шаблонизация ...Это middleware
 app.set('views', path.join(__dirname,'./views') ); 
 app.set('view engine', 'pug')
-//Слушаем порт.... Это middleware
+
 // Пробуем получить перечень форматов getFormats(opts, oauth2client, credentials)
 app.get('/formats', async (req, res, next) => {
     try{

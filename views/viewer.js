@@ -5,7 +5,7 @@ var tokenCoded = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6d2FyZXN0b3JlMi8zMi0yMS0lRD
   var tokenTool = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6d2FyZXN0b3JlMi8zMi0yMS0lRDAlOTMlRDAlQUQyXyVEMCU5NSVEMCVBMSVEMCU5RiVEMCU5NCVEMCU5N18lRDAlQUQlRDAlQkIlRDAlQkMlRDAlQjBfJUQwJUExJUQwJUJBJUQwJUJCJUQwJUIwJUQwJUI0JUUyJTg0JTk2Ml8lRDAlQUQucnZ0'
 
 var documentId ="urn:"+tokenCoded;
-console.log(documentId);    
+   
       // токен из https://www.base64encode.org/
       
 
@@ -43,7 +43,7 @@ console.log(documentId);
         function getForgeToken(callback) {
         jQuery.ajax({
             url: "/publictoken",
-            success: function (res) {callback(res.access_token, res.expires_in), console.log(res.access_token)},  
+            success: function (res) {callback(res.access_token, res.expires_in)},  
            
         });
       }
