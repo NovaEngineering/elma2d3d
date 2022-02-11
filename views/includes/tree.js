@@ -2,10 +2,12 @@ $(document).ready(
    () => { $('#tree').jstree({
         "core" : {
             "data" : {
-                "url" : "http://localhost:3000/buckets",
+                "url" : "/buckets",
                 "dataType" : "json",
                 "data": function (node) {
-                    return { "id": node.id };
+                    return {    
+                        "id": node.id,
+                    };
                   }
                             }
     }

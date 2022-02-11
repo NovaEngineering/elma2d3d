@@ -42,7 +42,7 @@ var documentId ="urn:"+tokenCoded;
         // Декларирование функции для авторизации по токену
         function getForgeToken(callback) {
         jQuery.ajax({
-            url: "/publictoken",
+            url: "/public_token",
             success: function (res) {callback(res.access_token, res.expires_in)},  
            
         });

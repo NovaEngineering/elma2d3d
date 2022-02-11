@@ -12,10 +12,8 @@ html(lang="en")
     script(src="https://developer.api.autodesk.com/modelderivative/v2/viewers/2.*/three.min.js")
     //Подгружаем скрипты со своего сервера
     script
-      include jq.js
-      include tree.js
-    script 
-      include viewer.js 
+      include includes/tree.js
+      include includes/viewer.js 
     
     // Подгружаем CSS от Forge Autodesk
     link(rel="stylesheet", href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css")
