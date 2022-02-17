@@ -1,11 +1,20 @@
 var viewer = null;
 var options = {getAccessToken: getForgeToken};
 var tokenCoded = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6d2FyZXN0b3JlMi8zMi0yMS0lRDAlOTMlRDAlQUQyXyVEMCU5NSVEMCVBMSVEMCU5RiVEMCU5NCVEMCU5N18lRDAlQUQlRDAlQkIlRDAlQkMlRDAlQjBfJUQwJUExJUQwJUJBJUQwJUJCJUQwJUIwJUQwJUI0JUUyJTg0JTk2Ml8lRDAlQUQucnZ0'
-// токен из forgetool vscode
+ //токен из forgetool vscode
   var tokenTool = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6d2FyZXN0b3JlMi8zMi0yMS0lRDAlOTMlRDAlQUQyXyVEMCU5NSVEMCVBMSVEMCU5RiVEMCU5NCVEMCU5N18lRDAlQUQlRDAlQkIlRDAlQkMlRDAlQjBfJUQwJUExJUQwJUJBJUQwJUJCJUQwJUIwJUQwJUI0JUUyJTg0JTk2Ml8lRDAlQUQucnZ0'
+var selfGet = 'YWRzay5vYmplY3RzOm9zLm9iamVjdDp3YXJlc3RvcmUyLzMyLTIxLSVEMCU5MyVEMCVBRDJfJUQwJTk1JUQwJUExJUQwJTlGJUQwJTk0JUQwJTk3XyVEMCVBRCVEMCVCQiVEMCVCQyVEMCVCMF8lRDAlQTElRDAlQkElRDAlQkIlRDAlQjAlRDAlQjQlRTIlODQlOTYyXyVEMCVBRC5ydnQ='
+var documentId ="urn:"+selfGet;
+/*
+function utf8_to_b64(str)  {
+  return window.btoa(str)}
 
-var documentId ="urn:"+tokenCoded;
-   
+let url = new URL('http://localhost:3000/bucket_details')
+url.searchParams.set('bucketKey', 'warestore2');
+//console.log(url2);
+fetch(url).then(res=>res.json()).then(data => console.log(data.body.items[0].objectId));
+let urn = 
+   */
       // токен из https://www.base64encode.org/
       
 

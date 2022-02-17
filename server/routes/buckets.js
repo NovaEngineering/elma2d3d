@@ -8,13 +8,9 @@ router.get('/buckets',async (req, res, next) => {
     try {   let BucketsApi = new ForgeSDK.BucketsApi();
             bucketList =await BucketsApi.getBuckets({}, internalClient, await internalToken);
             res.json( bucketList.body.items.map((x) => {
-
                 return{
                     id: bucketList.body.items.indexOf(x),
                     text: x.bucketKey,
-
-                    //text: bucketList.idBucket,
-                    //type: 'bucket'
               }
            })
         )
