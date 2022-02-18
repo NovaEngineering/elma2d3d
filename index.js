@@ -8,6 +8,7 @@ let { appName, port } = require('./server/config');
 
 app.get('/', function(req, res) {res.render('index')});
 
+//app.get('/get_metadata', require('./server/routes/get_metadata'))
 app.get('/bucket_details', require('./server/routes/bucket_details')) 
 app.get('/public_token', require('./server/routes/publictoken'));
 app.get('/buckets', require('./server/routes/buckets'));

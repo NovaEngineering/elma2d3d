@@ -18,17 +18,16 @@ html(lang="en")
     script
       include includes/tree.js
       include includes/viewer.js
-      //include includes/click.js
-    
+      include includes/new.js
     //CSS Forge Autodesk
     link(rel="stylesheet", href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css")
-    //JStree
+    //Tree view
     script(src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js")
     link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css")
   body
   div(class="container")
     div(class="container")
-      h1 Это просмотрщик
+      h1(id="mainHeader") Это просмотрщик
     div(class="row")
       div(class="col-md-2" id="tree")
       div(class="col-md-10" id="forgeViewer")
