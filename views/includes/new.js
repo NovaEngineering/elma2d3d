@@ -1,4 +1,6 @@
-$(document).ready(function () {
-   
-    
-});
+const list = new Vue ({
+    el: '#vuetree',
+data: {
+    message: 'моделька'
+}});
+
