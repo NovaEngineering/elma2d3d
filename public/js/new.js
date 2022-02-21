@@ -8,6 +8,8 @@
   
     }
     
+ fetch('http://localhost:3000/buckets').then((res)=> {console.log('full ---  ' + res)});
+ fetch('/buckets').then((res)=> {console.log('short ---  ' + res)});
 
  
  //x.textContent = 'from there to here'
