@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer</title>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"><!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Forge Autodesk-->
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/2.*/three.min.js"></script>
+    <!--CSS Forge Autodesk-->
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css">
+    <!--Tree view-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css">
+    <!--Vue-->
+    <script src="https://unpkg.com/vue@2"></script>
+    <!--Vuetify-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.6.3/vuetify.min.js"></script>
+    <script src="./js/viewer.js"></script>
+    <script src="./js/tree.js"></script>
+    <script src="./js/rawbuckets.js"></script>
+  </head>
+  <body>
+        <div class="container">
+        <div class="container">
+          <h1 id="mainHeader">Это просмотрщик</h1>
+        </div>
+        <div class="row">
+          <div class="col-md-2" id="tree"></div>
+          <div class="col-md-10" id="forgeViewer"></div>
+        </div>
+      </div></div>
+      <!--
+      <div id="tree">
+        {{data}}
+      
+    -->
+          <!--<script src="./js/new.js"></script>-->
+       
+<!-- the demo root element -->
+<script type="text/x-template" id="item-template">
+  <li>
+    <div
+      :class="{bold: isFolder}"
+      @click="toggle"
+      @dblclick="makeFolder">
+      {{ item.name }}
+      <span v-if="isFolder">[{{ isOpen ? '-' : '+' }}]</span>
+    </div>
+    <ul v-show="isOpen" v-if="isFolder">
+      <tree-item
+        class="item"
+        v-for="(child, index) in item.children"
+        :key="index"
+        :item="child"
+        @make-folder="$emit('make-folder', $event)"
+        @add-item="$emit('add-item', $event)"
+      ></tree-item>
+      <li class="add" @click="$emit('add-item', item)">+</li>
+    </ul>
+  </li>
+</script>
+</head>
+<body>
+<p>(You can double click on an item to turn it into a folder.)</p>
+<ul id="demo">
+  <tree-item
+    class="item"
+    :item="treeData"
+    @make-folder="makeFolder"
+    @add-item="addItem"
+  ></tree-item>
+</ul>
+
+<script>
+  // demo data
+  var treeData = {
+    name: "My Tree",
+    children: [
+      { name: "hello" },
+      { name: "wat" },
+      {
+        name: "child folder",
+        children: [
+          {
+            name: "child folder",
+            children: [{ name: "hello" }, { name: "wat" }]
+          },
+          { name: "hello" },
+          { name: "wat" },
+          {
+            name: "child folder",
+            children: [{ name: "hello" }, { name: "wat" }]
+          }
+        ]
+      }
+    ]
+  };
+
+  // define the tree-item component
+  Vue.component("tree-item", {
+    template: "#item-template",
+    props: {
+      item: Object
+    },
+    data: function() {
+      return {
+        isOpen: false
+      };
+    },
+    computed: {
+      isFolder: function() {
+        return this.item.children && this.item.children.length;
+      }
+    },
+    methods: {
+      toggle: function() {
+        if (this.isFolder) {
+          this.isOpen = !this.isOpen;
+        }
+      },
+      makeFolder: function() {
+        if (!this.isFolder) {
+          this.$emit("make-folder", this.item);
+          this.isOpen = true;
+        }
+      }
+    }
+  });
+
+  // boot up the demo
+  var demo = new Vue({
+    el: "#demo",
+    data: {
+      treeData: treeData
+    },
+    methods: {
+      makeFolder: function(item) {
+        Vue.set(item, "children", []);
+        this.addItem(item);
+      },
+      addItem: function(item) {
+        item.children.push({
+          name: "new stuff"
+        });
+      }
+    }
+  });
+</script>
+
+
+
+
+
+  </body>
+  
+      
+</html>
