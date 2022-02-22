@@ -5,13 +5,16 @@
             //{name: "warestore2"},
             //{name: "warestore3"}
         ]
-  
     }
-    
- fetch('http://localhost:3000/buckets').then((res)=> {console.log('full ---  ' + res)});
- fetch('/buckets').then((res)=> {console.log('short ---  ' + res)});
 
- 
+
+  
+  var element = document.querySelector('.fetchans');
+  element.innerHTML(
+    fetch('http://localhost:3000/buckets')
+    .then((res)=> {return res.text})
+    .then((data)=> {data; console.log(data.json)}))
+
  //x.textContent = 'from there to here'
   Vue.component("tree-item", {
     template: "#item-template",
@@ -62,4 +65,4 @@
     }
   });
 
-  console.log(document.styleSheets)
+ 
