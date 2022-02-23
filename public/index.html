@@ -25,29 +25,42 @@
 <body>
 <div class="container">
   <h1 id="mainHeader">Это просмотрщик</h1>
-  <div class="container" id="tree">
-    <script type="text/x-template" id="item-template">
-          <li>
-            <tree-item
-              class="item"
-              v-for="(child, index) in item.children"
-              :key="index"
-              :item="child"
-              @make-folder="$emit('make-folder', $event)"
-              @add-item="$emit('add-item', $event)"
-            ></tree-item>
-            </li>
-    </script>
+  
+  <div class="container bg-primary" id="tree">
+    <span>Дерево должно быть здесь</span>
+    
+  <ul id="listofitems"> Вот Вам заголовок списка в ul теге.
+    <li v-for="item in items" :key="item.text">
+      {{ item.text }}
+    </li>
+  </ul>
+  <script>
+    // получи
+    var x = fetch('http://localhost:3000/buckets')
+     .then((res)=>{ return res.json()})
+     .then((data)=>{return data;console.log(data)})
+    //Это данные для дерева
+    var treeBucketsData = {
+     items: [
+       {name: "warestore2"},   
+       {name: "warestore3"}
+     ]
+   };
+    var treePromised = {
+     items: x
+   };
+   
+ var listOfItems = new Vue ({
+   el: '#listofitems',
+   data: /*treeBucketsData*/  treePromised,
+ });
+ 
+  </script>
 
-
-        <p>Дерево проекта здесь</p>
-        <ul id="demo">
-        <!--<tree-item class="item" :item="treeData" @make-folder="makeFolder" 
-        @add-item="addItem"></tree-item>-->
-        <tree-item class="item" :item="treeData"></tree-item>
-        </ul>
-  <script src="./js/new.js"></script>
   </div>
+  
+ <!--<script src="./js/new.js"></script>--> 
+  
   <div class="container" id="forgeViewer"></div>
 </div>
 </body>
