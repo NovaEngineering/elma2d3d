@@ -5,11 +5,8 @@ var options = {getAccessToken: getForgeToken};
 var tokenManifest = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6d2FyZXN0b3JlMy8zMi0yMS0lRDAlOTMlRDAlQUQzXyVEMCU5NSVEMCVBMSVEMCU5RiVEMCU5NCVEMCU5N18lRDAlQUQlRDAlQkIlRDAlQkMlRDAlQjBfJUQwJUExJUQwJUJBJUQwJUJCJUQwJUIwJUQwJUI0JUUyJTg0JTk2M18lRDAlQUQucnZ0'
 
 var documentId ="urn:"+tokenManifest;
-
-      
-
         Autodesk.Viewing.Initializer(options, function onInitialized() {
-            var htmlDiv = document.getElementById("forgeViewer");
+            var htmlDiv = document.querySelector('#forgeViewer')
             viewer = new Autodesk.Viewing.GuiViewer3D(htmlDiv);
             viewer.start();    
 

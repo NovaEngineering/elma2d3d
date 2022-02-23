@@ -1,68 +1,45 @@
    
-   var treeData = {
-        name: "Перечень файлов",
-        children: [
-            //{name: "warestore2"},
-            //{name: "warestore3"}
-        ]
+//Это данные для дерева
+var treeBucketsData = {
+    name: "Перечень файлов",
+    children: [
+      {name: "warestore2"},   
+      {name: "warestore3"}
+    ]
+}
+
+//Это компонент c глобальной регистрацией
+//Компонент - переиспользованный экземпляр Vue
+// tree-item - название компонента
+Vue.component("tree-item", {
+template: "#item-template",
+// props список входных параметров
+props: {
+  item: Object
+},
+});
+
+//Разбираем экземпляр Vue
+
+var demo = new Vue({
+  //Это все опции
+  // Селектор html элемента
+  el: "#demo",
+  // Данные
+  data: {
+    //treeData уходит в html tag tree-item, что етсь компонент
+    treeData: treeBucketsData
+  },
+
+  methods: {
+    makeFolder: function(item) {
+      Vue.set(item, "children", []);
+      this.addItem(item);
+    },
+    addItem: function(item) {
+      item.children.push({
+        name: "new stuff"
+      });
     }
-
-
-  
-  var element = document.querySelector('.fetchans');
-  element.innerHTML(
-    fetch('http://localhost:3000/buckets')
-    .then((res)=> {return res.text})
-    .then((data)=> {data; console.log(data.json)}))
-
- //x.textContent = 'from there to here'
-  Vue.component("tree-item", {
-    template: "#item-template",
-    props: {
-      item: Object
-    },
-    data: function() {
-      return {
-        isOpen: false
-      };
-    },
-    computed: {
-      isFolder: function() {
-        return this.item.children && this.item.children.length;
-      }
-    },
-    methods: {
-      toggle: function() {
-        if (this.isFolder) {
-          this.isOpen = !this.isOpen;
-        }
-      },
-      makeFolder: function() {
-        if (!this.isFolder) {
-          this.$emit("make-folder", this.item);
-          this.isOpen = true;
-        }
-      }
-    }
-  });
-
-  // boot up the demo
-  var demo = new Vue({
-    el: "#demo",
-    data: {
-      treeData: treeData
-    },
-    methods: {
-      makeFolder: function(item) {
-        Vue.set(item, "children", []);
-        this.addItem(item);
-      },
-      addItem: function(item) {
-        item.children.push({
-          name: "new stuff"
-        });
-      }
-    }
-  });
-
- 
+  }
+});

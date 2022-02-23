@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,24 +23,11 @@
 </head>
 
 <body>
-<div class="fetchans"></div>
 <div class="container">
   <h1 id="mainHeader">Это просмотрщик</h1>
   <div class="container" id="tree">
     <script type="text/x-template" id="item-template">
           <li>
-          <!--
-          <div
-            :class="{bold: isFolder}"
-            -@click="toggle"
-            @dblclick="makeFolder">
-            {{ item.name }} 
-            <span v-if="isFolder">[{{ isOpen ? '-' : '+' }}]</span>
-          </div> -->
-          <!--My own-->
-          <div>{{ item.name }} </div>
-          <!--My own-->
-          <ul v-show="isOpen" v-if="isFolder">
             <tree-item
               class="item"
               v-for="(child, index) in item.children"
@@ -50,22 +36,20 @@
               @make-folder="$emit('make-folder', $event)"
               @add-item="$emit('add-item', $event)"
             ></tree-item>
-            <!--<li class="add" @click="$emit('add-item', item)">+</li>-->
-          </ul>
-        </li>
+            </li>
     </script>
 
 
         <p>Дерево проекта здесь</p>
         <ul id="demo">
-        <tree-item class="item" :item="treeData" @make-folder="makeFolder" 
-        @add-item="addItem"></tree-item>
+        <!--<tree-item class="item" :item="treeData" @make-folder="makeFolder" 
+        @add-item="addItem"></tree-item>-->
+        <tree-item class="item" :item="treeData"></tree-item>
         </ul>
   <script src="./js/new.js"></script>
   </div>
   <div class="container" id="forgeViewer"></div>
 </div>
-<div id="domdom"></div>  dom ap
 </body>
 
 </html>
