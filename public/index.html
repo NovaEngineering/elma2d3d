@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css"
     type="text/css">
   <!--Vue-->
+  <!-- Это файлы фреймворка-->
   <script src="https://unpkg.com/vue@2"></script>
   <!--Vuetify-->
   <script src="./js/viewer.js"></script>
@@ -25,41 +26,119 @@
 <body>
 <div class="container">
   <h1 id="mainHeader">Это просмотрщик</h1>
-  
+ 
   <div class="container bg-primary" id="tree">
     <span>Дерево должно быть здесь</span>
-    
-  <ul id="listofitems"> Вот Вам заголовок списка в ul теге.
-    <li v-for="item in items" :key="item.text">
-      {{ item.text }}
-    </li>
-  </ul>
-  <script>
-    // получи
-    var x = fetch('http://localhost:3000/buckets')
-     .then((res)=>{ return res.json()})
-     .then((data)=>{return data;console.log(data)})
-    //Это данные для дерева
-    var treeBucketsData = {
-     items: [
-       {name: "warestore2"},   
-       {name: "warestore3"}
-     ]
-   };
-    var treePromised = {
-     items: x
-   };
-   
- var listOfItems = new Vue ({
-   el: '#listofitems',
-   data: /*treeBucketsData*/  treePromised,
- });
  
-  </script>
+    <script type="text/x-template" id="item-template">
+      <li>
+        <div
+          :class="{bold: isFolder}"
+          @click="toggle"
+          >
+          {{ item.name }}
+          <span v-if="isFolder">[{{ isOpen ? '-' : '+' }}]</span>
+        </div>
+        <ul v-show="isOpen" v-if="isFolder">
+          <tree-item
+            class="item"
+            v-for="(child, index) in item.children"
+            :key="index"
+            :item="child"
+            
+          ></tree-item>
+          
+        </ul>
+      </li>
+    </script>
+  </head>
+  <body>
+    
+    <!-- the demo root element -->
+    <ul id="demo">
+      <tree-item
+        class="item"
+        :item="treeData"
+        ></tree-item>
+    </ul>
+
+    <script>
+     
+       //Это данные для дерева
+       var treeData = {
+        name: "My Tree",
+        children: [
+          {name: "warestore2"},   
+          {name: "warestore3"}
+        ]
+      };
+
+      // define the tree-item component
+      Vue.component("tree-item", {
+        template: "#item-template",
+        props: {
+          item: Object
+        },
+        data: function() {
+          return {
+            isOpen: false
+          };
+        },
+        computed: {
+          isFolder: function() {
+            return this.item.children && this.item.children.length;
+          }
+        },
+        methods: {
+          toggle: function() {
+            if (this.isFolder) {
+              this.isOpen = !this.isOpen;
+            }
+          },
+        }
+      });
+
+      // boot up the demo
+      var demo = new Vue({
+        el: "#demo",
+        data: {
+          treeData: treeData
+        },
+        });
+    </script>
+
+    <script>
+     
+    </script>
 
   </div>
-  
- <!--<script src="./js/new.js"></script>--> 
+  <!--
+     // demo data
+     
+      var treeData = {
+        name: "My Tree",
+        children: [
+          { name: "hello" },
+          { name: "wat" },
+          {
+            name: "child folder",
+            children: [
+              {
+                name: "child folder",
+                children: [{ name: "hello" }, { name: "wat" }]
+              },
+              { name: "hello" },
+              { name: "wat" },
+              {
+                name: "child folder",
+                children: [{ name: "hello" }, { name: "wat" }]
+              }
+            ]
+          }
+        ]
+      };
+    -->
+ 
   
   <div class="container" id="forgeViewer"></div>
 </div>

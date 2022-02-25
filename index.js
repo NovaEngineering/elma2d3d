@@ -13,6 +13,7 @@ app.get('/bucket_details', require('./server/routes/bucket_details'))
 app.get('/public_token', require('./server/routes/publictoken'));
 app.get('/buckets', require('./server/routes/buckets'));
 app.get('/buckets_raw', require('./server/routes/buckets_raw'));
+app.get('/buckets_peter', require('./server/routes/buckets_peter'))
 app.use(express.static(path.join(__dirname, 'public')))
 //app.set('views', path.join( __dirname,'views')); 
 //app.set('view engine', 'pug');
